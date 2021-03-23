@@ -1,0 +1,22 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id Desenho</th>
+            <th>Autor</th>
+            <th>Titulo</th>
+            <th>Observações</th>
+            <th>Desenho</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr repeat.for="desenho of desenhos">
+            <td>${desenho.iddesenho}</td>
+            <td>${desenho.autor.nome}</td>
+            <td>${desenho.titulo}</td>
+            <td>${desenho.observacoes}</td>
+            <td> <img src="${desenho.desenho}"></td>
+
+        </tr>
+
+    </tbody>
+</table>
