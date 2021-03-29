@@ -5,6 +5,7 @@
             <th>Autor</th>
             <th>Username</th>
             <th>Numero de desenhos</th>
+            <th>Apagar</th>
         </tr>
     </thead>
     <tbody>
@@ -13,8 +14,13 @@
             <td>${autor.nome}</td>
             <td>${autor.userName}</td>
             <td>${autor.desenhos.length}</td>
-
+            <td>
+                <button class="delete" click.trigger="delete(autor)"></button>
+            </td>
+            
         </tr>
 
     </tbody>
+    
+    
 </table>

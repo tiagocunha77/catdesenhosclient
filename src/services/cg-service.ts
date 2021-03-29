@@ -1,33 +1,40 @@
-import { IRouter, Router } from "aurelia";
-import { LoginPage } from "../pages/login-page";
+import { IRouter, json } from "aurelia";
+import { Autor } from "../entities/autor";
+import { Desenho } from "../entities/desenho";
 
 export class CgService {
-    host = 'http://localhost:8080';
-    username = 'tiago';
-    password = '123456';
+   
+    estaAutenticado=false;
 
-    constructor(@IRouter private router:IRouter) {
+    host = 'http://localhost:8080';
+    
+
+    constructor(@IRouter private router: IRouter) {
 
     }
 
 
     makeRequest = (url: string, method: string = "GET", body?: BodyInit): Promise<any> => {
 
-        //let headers = new Headers();
+        let headers = undefined;
 
-        //headers.append('Content-Type', 'text/json');
-        //headers.set('Authorization', 'Basic ' + btoa(username + ":" + password))
+        if (body instanceof FormData) {
+            console.info("teste", body)
+        } else {
+            headers= new Headers()
+            headers.append('Content-Type', 'application/json');
+        }
 
         return fetch(this.host + url, {
             method: method,
-            //headers: headers,
+            headers: headers,
             credentials: "include",
             body: body
         })
             .then(response => {
                 if (response.redirected && response.url.includes("/login")) {
                     console.info("router", this.router);
-                   this.router.load('login-page');
+                    this.router.load('login-page');
                 }
 
                 return response.json()
@@ -40,16 +47,44 @@ export class CgService {
 
     login(formData) {
 
-        return this.makeRequest('/login','POST', formData)
+        return this.makeRequest('/login', 'POST', formData).then(_r=>{
+            this.estaAutenticado=true;
+            return _r;
+        })
+    }
+
+    logout() {
+        return this.makeRequest('/logout').then(_r=>{
+            this.estaAutenticado=false;
+            return _r;
+        })
     }
 
     getAutores = () => {
         return this.makeRequest("/autor")
     }
 
+    addAutor = (autor: Autor) => {
+        return this.makeRequest("/autor", "POST", json(autor))
+    }
+
 
     getDesenhos = () => {
         return this.makeRequest("/desenhos")
     }
+
+
+    addDesenho = (desenho: Desenho) => {
+        return this.makeRequest("/desenhos", "POST", json(desenho))
+    }
+
+    deleteAutor = (id) => {
+        return this.makeRequest("/autor/" + id, "DELETE")
+    }
+
+    deleteDesenho = (iddesenho) => {
+        return this.makeRequest("/desenhos/" + iddesenho, "DELETE")
+    }
+
 
 }

@@ -16,4 +16,12 @@ export class AutorPage {
         })
     }
 
+    delete(autor) {
+        if (confirm(`Tem a certeza que quer apagar o autor "${autor.nome}"?`)) {
+            this.cgService.deleteAutor(autor.id).then(() => {
+                this.binding();
+            })
+        }
+
+    }
 }

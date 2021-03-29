@@ -1,0 +1,39 @@
+<form submit.trigger="save()">
+  <div class="field">
+    <label class="label">Titulo</label>
+    <div class="control">
+      <input  type="text" value.bind="desenho.titulo">
+    </div>
+
+  </div>
+  <div class="field">
+    <label class="label">Observação</label>
+    <div class="control">
+      <input type="text" value.bind="desenho.observacoes">
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Desenho</label>
+    <div class="control">
+      <input type="file" change.delegate="fileSelected($event)">
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Autor</label>
+    <div class="control">
+      <select value.bind="desenho.autor">
+        <option repeat.for="autor of autores" model.bind="autor">
+          ${autor.nome}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="control">
+    <input type="submit" value="guardar" class="button is-primary">
+  </div>
+
+
+
+
+
+</form>

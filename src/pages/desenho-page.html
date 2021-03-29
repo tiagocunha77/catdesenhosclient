@@ -6,16 +6,19 @@
             <th>Titulo</th>
             <th>Observações</th>
             <th>Desenho</th>
+            <th>Apagar</th>
         </tr>
     </thead>
     <tbody>
         <tr repeat.for="desenho of desenhos">
-            <td>${desenho.iddesenho}</td>
+            <td>${desenho.id}</td>
             <td>${desenho.autor.nome}</td>
             <td>${desenho.titulo}</td>
             <td>${desenho.observacoes}</td>
             <td> <img src="${desenho.desenho}"></td>
-
+            <td>
+                <button class="delete" click.trigger="delete(desenho)"></button>
+            </td>
         </tr>
 
     </tbody>

@@ -6,9 +6,17 @@ export class DesenhoPage {
     constructor(private cgService: CgService) {
 
     }
-    binding(){
+    binding() {
         return this.cgService.getDesenhos().then(_desenhos => {
-            this.desenhos=_desenhos;
+            this.desenhos = _desenhos;
         })
+    }
+
+    delete(desenhos) {
+        if (confirm(`TEm a certeza que quer apagar o desenho "${desenhos.titulo}"`)) {
+            this.cgService.deleteDesenho(desenhos.id).then(() => {
+                this.binding();
+            })
+        }
     }
 }

@@ -1,10 +1,21 @@
 
 
 <form ref="formElem" submit.trigger="login()">
-    <input type="text" name="username">
-    <br>
-    <input type="password" name="password">
+    <div class="field">
+        <label class="label">User Name</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="e.g Tiagocunha" name="username">
+        </div>
+      </div>
+      
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control">
+          <input class="input" type="password" name="password">
+        </div>
+      </div>
+      <div class="control">
+        <button value="login" class="button is-primary" >Login</button>
+      </div>
 
-    <br>
-    <input type="submit" value="login" class="button is-primary">
 </form>
